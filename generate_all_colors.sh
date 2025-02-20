@@ -1,5 +1,7 @@
 #!/bin/bash
 
+make -s
+
 mkdir -p all_colors
 
 for x in `cat colors.txt`; do

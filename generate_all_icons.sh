@@ -1,5 +1,6 @@
 #!/bin/bash
 
+make -s
 
 mkdir -p FontAwesomeIconsNoGrandient
 
