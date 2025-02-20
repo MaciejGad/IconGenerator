@@ -103,8 +103,8 @@ In this example, the command generates an icon using the `FontAwesome` font, wit
 
 The following is a list of available icon sets that can be used with IconGenerator:
 
-- **FontAwesome**: A popular icon set and toolkit with a wide range of icons for various purposes. You can find the complete list of FontAwesome icons [here](awesome_icons.html).
-- **Tabler Icons**: A set of over 800 free and open-source icons designed for web and mobile interfaces. You can find the complete list of Tabler Icons [here](tabler_icons.html).
+- **FontAwesome**: A popular icon set and toolkit with a wide range of icons for various purposes. You can find the complete list of FontAwesome icons [here](https://maciejgad.github.io/IconGenerator/awesome_icons.html).
+- **Tabler Icons**: A set of over 800 free and open-source icons designed for web and mobile interfaces. You can find the complete list of Tabler Icons [here](https://maciejgad.github.io/IconGenerator/tabler_icons.html).
 
 To use an icon from one of these sets, specify the `--font-name` option followed by the name of the icon set (e.g., `--font-name tabler-icons`).
 
