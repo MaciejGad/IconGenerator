@@ -67,6 +67,11 @@ func printHelp() {
     """)
 }
 
+if arguments.isEmpty {
+    printHelp()
+    exit(1)
+}
+
 let config = Configuration()
 var positionalArgumentsIndex: Int = 0
 
@@ -223,7 +228,7 @@ if config.gradient {
 
 // load font FontAwesome
 guard let font = loadFont(from: fontPath, size: pointSize) else {
-    print("❌ Nie udało się załadować czcionki.")
+    print("❌ Failed to load font.")
     exit(1)
 }
 
