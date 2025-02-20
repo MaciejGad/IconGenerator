@@ -5,13 +5,13 @@ import Foundation
 
 var arguments = CommandLine.arguments.dropFirst()
 
-enum Option: String {
+enum Option: String, CaseIterable {
     case fontName = "--font-name"
     case outputFile = "--output"
-    case noGradient = "--no-gradient"
-    case verbose = "--verbose"
-    case reversed = "--reversed"
     case fontColor = "--font-color"
+    case noGradient = "--no-gradient"
+    case reversed = "--reversed"
+    case verbose = "--verbose"
     case help = "--help"
 
     var haveValues: Bool {
@@ -22,6 +22,46 @@ enum Option: String {
             return false
         }
     }
+
+    func description() -> String {
+        switch self {
+        case .fontName:
+            return "Font name (default: FontAwesome)"
+        case .outputFile:
+            return "Output file name (default: output.png)"
+        case .noGradient:
+            return "Disable gradient background"
+        case .verbose:
+            return "Print verbose output"
+        case .reversed:
+            return "Reverse icon and background colors"
+        case .fontColor:
+            return "Font color (default: ffffff)"
+        case .help:
+            return "Print help"
+        }
+    }
+
+    func help(indent: Int) -> String {
+        var output = self.rawValue 
+        if haveValues {
+             output += " <value>"
+        } 
+        return output.padding(toLength: indent, withPad: " ", startingAt: 0) + "  \(description())"
+    }
+
+    func lenght() -> Int {
+        if haveValues {
+            return self.rawValue.count + 8
+        }
+        return self.rawValue.count
+    }
+}
+
+func optionsHelp() -> String {
+    let allCases = Option.allCases
+    let maxOptionLength = allCases.map { $0.lenght() }.max() ?? 0
+    return allCases.map { $0.help(indent: maxOptionLength) }.joined(separator: "\n")
 }
 
 class Configuration {
@@ -52,18 +92,15 @@ class Configuration {
 func printHelp() {
     let name = CommandLine.arguments[0]
     print("""
-    Usage: \(name) [options] <icon-unicode> <icon-color>
+    Usage: \(name) <icon-unicode> <icon-color> [options]
 
     Options:
-    --font-name <name>     Font name (default: FontAwesome)
-    --output <file>        Output file name (default: output.png)
-    --no-gradient          Disable gradient background
-    --reversed             Reverse icon and background colors
-    --font-color <color>   Font color (default: ffffff)
-    --verbose              Print verbose output
+    \(optionsHelp())
 
     Example:
-    \(name) --font-name FontAwesome --output icon.png f10b 3498db
+    \(name) f10b 3498db --font-name FontAwesome --output icon.png 
+
+    See: https://github.com/MaciejGad/IconGenerator/tree/main#usage
     """)
 }
 
@@ -126,6 +163,8 @@ if config.verbose {
     print("hexColor: \(config.hexColor)")
     print("iconUnicode: \(config.iconUnicode)")
     print("fontColor: \(config.fontColor)")
+    print("reversed: \(config.reversed)")
+    
 }
 
 // Path to the FontAwesome.ttf font file
