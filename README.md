@@ -26,6 +26,7 @@ This command generates an icon using the `tabler-icons` font, with the icon unic
     - [Reversed no gradient](#reversed-no-gradient)
     - [Gradient icon on plain background](#gradient-icon-on-plain-background)
 - [List of available icons](#list-of-available-icons)
+- [Compilation](#compilation)
 - [Contributing](#contributing)
 - [Author](#author)
 - [License](#license)
@@ -108,6 +109,15 @@ The following is a list of available icon sets that can be used with IconGenerat
 
 To use an icon from one of these sets, specify the `--font-name` option followed by the name of the icon set (e.g., `--font-name tabler-icons`).
 
+## Compilation
+
+To compile the IconGenerator tool, you can use the `make` command. This will build the project and generate the executable file `icon_gen`. Ensure you have `make` installed on your system before running the command.
+
+```bash
+make
+```
+
+This command will execute the instructions defined in the [Makefile](Makefile), compiling the source code and producing the final executable. Once the compilation is complete, you can run the IconGenerator tool using the generated executable.
 
 ## Contributing
 
