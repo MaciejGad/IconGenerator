@@ -25,6 +25,7 @@ This command generates an icon using the `tabler-icons` font, with the icon unic
     - [No gradient](#no-gradient)
     - [Reversed no gradient](#reversed-no-gradient)
     - [Gradient icon on plain background](#gradient-icon-on-plain-background)
+- [List of available icons](#list-of-available-icons)
 - [Contributing](#contributing)
 - [Author](#author)
 - [License](#license)
@@ -97,6 +98,16 @@ icon_gen.swift f10b ffffff --font-color 3498db --no-gradient --reversed --output
 In this example, the command generates an icon using the `FontAwesome` font, with the icon unicode `f10b`. The icon has gradient starting with white. Bacground is plain 3498db.
 
 <img src="icon_gradient.png">
+
+## List of available icons
+
+The following is a list of available icon sets that can be used with IconGenerator:
+
+- **FontAwesome**: A popular icon set and toolkit with a wide range of icons for various purposes. You can find the complete list of FontAwesome icons [here](awesome_icons.html).
+- **Tabler Icons**: A set of over 800 free and open-source icons designed for web and mobile interfaces. You can find the complete list of Tabler Icons [here](tabler_icons.html).
+
+To use an icon from one of these sets, specify the `--font-name` option followed by the name of the icon set (e.g., `--font-name tabler-icons`).
+
 
 ## Contributing
 
