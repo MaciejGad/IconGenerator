@@ -66,6 +66,7 @@ func optionsHelp() -> String {
 
 class Configuration {
     var fontName: String = "FontAwesome"
+    var fontNameExtention: String = "otf"
     var outputFile: String = "output.png"
     var gradient: Bool = true
     var hexColor: String = "3498db"
@@ -78,7 +79,13 @@ class Configuration {
     func update(key: Option, value: String) {
         switch key {
         case .fontName:
-            fontName = value
+        let fontNameParts = value.split(separator: ".").map { String($0)}
+        if !fontNameParts.isEmpty {
+            fontName = fontNameParts[0]
+            if fontNameParts.count > 1 {
+                fontNameExtention = fontNameParts[1]
+            }
+        }
         case .outputFile:
             outputFile = value
         case .fontColor:
@@ -111,6 +118,7 @@ if arguments.isEmpty {
 
 let config = Configuration()
 var positionalArgumentsIndex: Int = 0
+let fileManager = FileManager.default
 
 var iterator = arguments.makeIterator()
 while let key = iterator.next() {
@@ -158,6 +166,7 @@ while let key = iterator.next() {
 
 if config.verbose {
     print("fontName: \(config.fontName)")
+    print("fontNameExtention: \(config.fontNameExtention)")
     print("outputFile: \(config.outputFile)")
     print("gradient: \(config.gradient)")
     print("hexColor: \(config.hexColor)")
@@ -168,7 +177,15 @@ if config.verbose {
 }
 
 // Path to the FontAwesome.ttf font file
-let fontPath = "./\(config.fontName).ttf"
+var fontPath = "./\(config.fontName).\(config.fontNameExtention)"
+
+if !fileManager.fileExists(atPath: fontPath) {
+   fontPath = "./\(config.fontName).ttf"
+}
+
+if !fileManager.fileExists(atPath: fontPath) {
+    fontPath = "./\(config.fontName).otf"
+}
 
 // Function to convert HEX color to NSColor
 func colorFromHex(_ hex: String) -> NSColor? {
@@ -343,7 +360,7 @@ if config.reversed {
 image.unlockFocus()
 
 // Get the current user's directory
-let fileManager = FileManager.default
+
 let currentPath = fileManager.currentDirectoryPath
 let outputPath = "\(currentPath)/\(config.outputFile)"
 

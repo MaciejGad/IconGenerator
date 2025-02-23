@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 from fontTools.ttLib import TTFont
+import sys
 
 def list_supported_chars(font_path):
     font = TTFont(font_path)
@@ -12,7 +13,11 @@ def list_supported_chars(font_path):
     hex_list = [hex(c) for c in sorted(supported_chars)]
     return hex_list
 
-font_path = "tabler-icons.ttf"
+if len(sys.argv) != 2:
+    print("Usage: python list_supported.py <font_path>")
+    sys.exit(1)
+
+font_path = sys.argv[1]
 l =  list_supported_chars(font_path)
 print(len(l))
 with open("supported_chars.txt", "w") as f:

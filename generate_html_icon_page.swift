@@ -13,7 +13,16 @@ guard arguments.count == 4 else {
 
 let inputFile = arguments[1]
 let outputFile = arguments[2]
-let fontFamily = arguments[3]
+var fontFamily: String = arguments[3]
+var fontNameExtention: String = "ttf"
+
+let fontNameParts = fontFamily.split(separator: ".").map { String($0)}
+if !fontNameParts.isEmpty {
+    fontFamily = fontNameParts[0]
+    if fontNameParts.count > 1 {
+        fontNameExtention = fontNameParts[1]
+    }
+}
 
 // Check if the icons file exists
 guard let fileContent = try? String(contentsOfFile: inputFile, encoding: .utf8) else {
@@ -35,7 +44,7 @@ var temp_html = """
     <style>
         @font-face {
             font-family: '\(fontFamily)';
-            src: url('\(fontFamily).ttf') format('truetype');
+            src: url('\(fontFamily).\(fontNameExtention)') format('truetype');
         }
         body {
             font-family: Arial, sans-serif;
@@ -62,7 +71,7 @@ var temp_html = """
     </style>
 </head>
 <body>
-    <h1>FontAwesome Icon List</h1>
+    <h1>\(fontFamily) Icon List</h1>
 """
 
 for code in iconCodes {
