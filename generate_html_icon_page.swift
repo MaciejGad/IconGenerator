@@ -65,7 +65,7 @@ var temp_html = """
         .code {
             display: inline-block;
             font-size: 16px;
-            font-color: #fff;
+            color: #fff;
             font-family: monospace;
         }
     </style>
